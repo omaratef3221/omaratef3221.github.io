@@ -38,17 +38,28 @@ def fetch_scholar_data():
                 pub_filled = scholarly.fill(pub)
                 bib = pub_filled.get('bib', {})
 
+                # Try multiple fields for venue information
+                venue = (
+                    bib.get('venue') or
+                    bib.get('journal') or
+                    bib.get('booktitle') or
+                    bib.get('publisher') or
+                    bib.get('citation', '').split(',')[0] if bib.get('citation') else None or
+                    'Conference/Journal'  # Better default than "Unknown Venue"
+                )
+
                 pub_data = {
                     'title': bib.get('title', 'Unknown Title'),
                     'authors': bib.get('author', 'Unknown Authors'),
-                    'venue': bib.get('venue', bib.get('journal', 'Unknown Venue')),
+                    'venue': venue.strip() if venue else 'Conference/Journal',
                     'year': int(bib.get('pub_year', 0)) if bib.get('pub_year') else 0,
                     'citations': pub_filled.get('num_citations', 0),
                     'url': pub_filled.get('pub_url', pub_filled.get('eprint_url', ''))
                 }
 
                 publications.append(pub_data)
-                print(f"  ✓ {pub_data['title'][:50]}... ({pub_data['citations']} citations)")
+                print(f"  ✓ {pub_data['title'][:50]}...")
+                print(f"    Citations: {pub_data['citations']} | Venue: {pub_data['venue']}")
 
                 # Small delay to avoid rate limiting
                 time.sleep(2)

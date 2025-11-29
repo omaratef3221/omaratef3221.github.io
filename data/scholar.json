@@ -11,7 +11,7 @@
     {
       "title": "Breast cancer detection using artificial intelligence techniques: A systematic literature review",
       "authors": "Ali Bou Nassif and Manar Abu Talib and Qassim Nasir and Yaman Afadar and Omar Elgendy",
-      "venue": "Unknown Venue",
+      "venue": "Artificial intelligence in medicine",
       "year": 2022,
       "citations": 338,
       "url": "https://www.sciencedirect.com/science/article/pii/S0933365722000410"
@@ -35,7 +35,7 @@
     {
       "title": "Alzheimer detection using different deep learning methods with MRI images",
       "authors": "Omar Elgendy and Ali Bou Nassif",
-      "venue": "Unknown Venue",
+      "venue": "IEEE",
       "year": 2023,
       "citations": 3,
       "url": "https://ieeexplore.ieee.org/abstract/document/10180640/"
@@ -43,7 +43,7 @@
     {
       "title": "Text toxicity level detection using deep contextualized embedding models",
       "authors": "Omar Elgendy and Ali Bou Nassif and Bassel Soudan",
-      "venue": "Unknown Venue",
+      "venue": "OkIP Books",
       "year": 2024,
       "citations": 1,
       "url": "https://scholar.google.com/scholar?cluster=11398924701268071726&hl=en&oi=scholarr"
@@ -51,7 +51,7 @@
     {
       "title": "Heart Failure Prediction using Machine learning with Metaheuristic feature selection techniques",
       "authors": "Omar Elgendy and Ali Bou Nassif and Bassel Soudan",
-      "venue": "Unknown Venue",
+      "venue": "OkIP Books",
       "year": 2024,
       "citations": 1,
       "url": "https://www.researchgate.net/profile/Omar-Elgendy-4/publication/384450466_Heart_Failure_Prediction_using_Machine_learning_with_Metaheuristic_feature_selection_techniques/links/68203e47d1054b0207ee2c20/Heart-Failure-Prediction-Using-Machine-Learning-with-Metaheuristic-Feature-Selection-Techniques.pdf"

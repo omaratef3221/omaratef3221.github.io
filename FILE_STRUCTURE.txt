@@ -4,72 +4,77 @@ MyWebsite - File Structure
 📁 MyWebsite/
 │
 ├── 📄 index.html                    Main HTML file
-├── 🎨 styles.css                    Stylesheet (with alignment fixes)
+├── 🎨 styles.css                    Complete stylesheet
 │
 ├── 📜 JavaScript Files
-│   ├── script.js                    Main JavaScript (contact form updated)
-│   ├── api-integration.js           Original API integration
-│   ├── load-experience.js          ⭐ NEW - Loads experience from JSON
-│   ├── scholar-integration.js      ⭐ NEW - Google Scholar integration
-│   └── github-starred.js           ⭐ NEW - GitHub starred repos
+│   ├── script.js                    Main JavaScript (navigation, animations)
+│   ├── load-about.js               Loads about section from JSON
+│   ├── load-experience.js          Loads experience timeline from JSON
+│   ├── load-skills.js              Loads skills with visual levels from JSON
+│   ├── scholar-integration.js      Publications with pagination & sorting
+│   └── github-pinned.js            GitHub repositories display
 │
-├── 🐍 Python Backend
-│   ├── main.py                      Flask app entry point
-│   └── portfolio.py                 API endpoints (updated with contact & starred)
+├── 🐍 Python Scripts
+│   └── update_data.py              Automated data update script
 │
-├── 📊 Data Files
+├── 📊 Data Files (JSON)
 │   └── data/
-│       └── experience.json         ⭐ NEW - Your work experience data
+│       ├── about.json              About section (MANUAL UPDATES)
+│       ├── experience.json         Work experience (MANUAL UPDATES)
+│       ├── skills.json             Skills & levels (MANUAL UPDATES)
+│       ├── scholar.json            Publications (AUTO-UPDATED)
+│       └── github.json             GitHub repos (AUTO-UPDATED)
 │
 ├── 🖼️ Assets
 │   ├── assets/
 │   │   └── images/
-│   │       └── omar_portrait.png
-│   └── OmarElgendyResumeSC-v2.pdf
+│   │       ├── omar_portrait.png   Profile photo
+│   │       └── companies/          Company logos (optional)
+│   └── OmarElgendyResumeSC-v2.pdf  Resume/CV
 │
 ├── 📚 Documentation
-│   ├── CHANGES_SUMMARY.md          ⭐ NEW - Summary of all changes
-│   ├── IMPLEMENTATION_GUIDE.md     ⭐ NEW - Detailed documentation
-│   ├── QUICK_START.md              ⭐ NEW - Quick start guide
-│   └── readme.md                    Original readme
-│
-├── 🧪 Testing
-│   └── test_api.py                 ⭐ NEW - API testing script
+│   ├── readme.md                   Complete documentation
+│   └── FILE_STRUCTURE.txt          This file
 │
 └── ⚙️ Configuration
-    ├── .gitignore                   Updated with Python/Flask entries
-    └── .git/                        Git repository
-
-Legend:
-⭐ = New files created
-📄 = HTML
-🎨 = CSS
-📜 = JavaScript
-🐍 = Python
-📊 = Data
-🖼️ = Assets
-📚 = Documentation
-🧪 = Testing
-⚙️ = Configuration
-
-API Endpoints:
-==============
-GET  /api/scholar/lw70gLkAAAAJ           - Google Scholar data
-GET  /api/github/omaratef3221            - GitHub profile
-GET  /api/github/omaratef3221/starred   - ⭐ NEW - Starred repos
-POST /api/contact                        - ⭐ NEW - Contact form
-GET  /api/cache/status                   - Cache status
-POST /api/cache/clear                    - Clear cache
+    └── .git/                       Git repository
 
 Key Features:
 =============
-✅ Fixed layout alignments
-✅ Dynamic work experience (JSON-based)
-✅ Live Google Scholar integration
-✅ Working contact form backend
-✅ GitHub starred repositories integration
-✅ Automatic project categorization
-✅ API response caching
-✅ Fallback data handling
-✅ Error notifications
-✅ Responsive design
+✅ Fully Static Website (No Backend Required)
+✅ Publications Pagination (3 per page)
+✅ Publications Sorting (Citations/Date)
+✅ Modern Skills Visualization (Pill Design)
+✅ Responsive Design (Mobile-Friendly)
+✅ JSON-Based Content Management
+✅ Python Auto-Update Script
+✅ GitHub Pages Ready
+
+Content Update Workflow:
+========================
+Manual Updates:
+  - Edit data/about.json
+  - Edit data/experience.json
+  - Edit data/skills.json
+
+Automatic Updates:
+  - Run: python update_data.py
+  - Updates data/scholar.json (Google Scholar)
+  - Updates data/github.json (GitHub Repos)
+
+Files Removed (Static Conversion):
+==================================
+❌ main.py                   - Flask backend
+❌ portfolio.py              - API routes
+❌ test_api.py               - API tests
+❌ api-integration.js        - Backend API calls
+❌ Multiple .md docs         - Consolidated into readme.md
+
+Technologies Used:
+==================
+- HTML5
+- CSS3 (Grid, Flexbox, Animations)
+- Vanilla JavaScript (ES6+)
+- Python 3 (data updates)
+- Google Fonts (Orbitron, Inter)
+- Font Awesome Icons v6.4
