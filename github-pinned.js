@@ -17,6 +17,7 @@ async function fetchGitHubPinned() {
 
         if (data.repositories && data.repositories.length > 0) {
             updateProjectsWithPinned(data.repositories);
+            updateGitHubStats(data.repositories.length);
         } else {
             throw new Error('No repositories found in JSON');
         }
@@ -132,6 +133,36 @@ function determineProjectCategories(repo) {
     }
 
     return categories;
+}
+
+function updateGitHubStats(repoCount) {
+    // Update hero section GitHub repos stat
+    const githubHeroStat = document.querySelector('.hero-stats .stat:nth-child(4) .stat-number');
+    if (githubHeroStat) {
+        animateCounter(githubHeroStat, repoCount);
+    }
+}
+
+function animateCounter(element, targetValue) {
+    const duration = 1000; // 1 second
+    const startValue = 0;
+    const startTime = performance.now();
+
+    function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        const currentValue = Math.floor(startValue + (targetValue - startValue) * progress);
+        element.textContent = currentValue + (currentValue > 0 ? '+' : '');
+
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = targetValue + '+';
+        }
+    }
+
+    requestAnimationFrame(updateCounter);
 }
 
 // Add CSS for project owner badge

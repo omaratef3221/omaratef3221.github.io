@@ -1,0 +1,84 @@
+{
+  "skills": [
+    {
+      "name": "Python",
+      "level": 10,
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Machine Learning",
+      "level": 9,
+      "category": "AI & ML"
+    },
+    {
+      "name": "Deep Learning",
+      "level": 9,
+      "category": "AI & ML"
+    },
+    {
+      "name": "PyTorch",
+      "level": 9,
+      "category": "Frameworks"
+    },
+    {
+      "name": "TensorFlow",
+      "level": 8,
+      "category": "Frameworks"
+    },
+    {
+      "name": "NLP",
+      "level": 9,
+      "category": "AI & ML"
+    },
+    {
+      "name": "LLMs",
+      "level": 9,
+      "category": "AI & ML"
+    },
+    {
+      "name": "AWS",
+      "level": 8,
+      "category": "Cloud & DevOps"
+    },
+    {
+      "name": "MLOps",
+      "level": 8,
+      "category": "Cloud & DevOps"
+    },
+    {
+      "name": "Docker",
+      "level": 8,
+      "category": "Cloud & DevOps"
+    },
+    {
+      "name": "SQL",
+      "level": 8,
+      "category": "Data & Databases"
+    },
+    {
+      "name": "Data Analysis",
+      "level": 9,
+      "category": "Data & Databases"
+    },
+    {
+      "name": "Computer Vision",
+      "level": 8,
+      "category": "AI & ML"
+    },
+    {
+      "name": "Scikit-learn",
+      "level": 9,
+      "category": "Frameworks"
+    },
+    {
+      "name": "Git",
+      "level": 9,
+      "category": "Tools"
+    },
+    {
+      "name": "JavaScript",
+      "level": 7,
+      "category": "Programming Languages"
+    }
+  ]
+}

@@ -3,7 +3,9 @@
     {
       "period": "2025 - Present",
       "title": "Machine Learning Specialist",
-      "company": "Virtue Therapy, Dubai, UAE",
+      "company": "Almosafer",
+      "location": "Dubai, UAE",
+      "logo": "assets/images/companies/almosafer.png",
       "achievements": [
         "Developed and deployed production-grade Machine Learning application for improving flight-addons profit by 55%",
         "Worked on building Reinforcement Learning for Google Ads Bids Enhancement that reduced cost by 30%",
@@ -13,7 +15,9 @@
     {
       "period": "2023 - 2025",
       "title": "R&D Machine Learning Engineer",
-      "company": "Virtue Therapy, Dubai, UAE",
+      "company": "Virtue Therapy",
+      "location": "Dubai, UAE",
+      "logo": "assets/images/companies/virtue.png",
       "achievements": [
         "Developed and deployed production-grade LLM applications achieving over 85% accuracy",
         "Fine-tuned transformer models with QLoRA and LoRA, improving task accuracy by up to 18%",
@@ -24,7 +28,9 @@
     {
       "period": "2021 - 2023",
       "title": "Junior Machine Learning Engineer",
-      "company": "Virtue Therapy, Dubai, UAE",
+      "company": "Virtue Therapy",
+      "location": "Dubai, UAE",
+      "logo": "assets/images/companies/virtue.png",
       "achievements": [
         "Built ML models for user behavior prediction, improving engagement insights by 30%",
         "Led end-to-end ML workflows using Scikit-learn, TensorFlow, and PyTorch",
@@ -35,7 +41,9 @@
     {
       "period": "2020 - 2021",
       "title": "Research Assistant",
-      "company": "University of Sharjah, UAE",
+      "company": "University of Sharjah",
+      "location": "UAE",
+      "logo": "assets/images/companies/uos.png",
       "achievements": [
         "Authored 6+ peer-reviewed AI research papers with over 350 total citations",
         "Developed optimized Arabic text summarization approach reducing training time by 45%",
