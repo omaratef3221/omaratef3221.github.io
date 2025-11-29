@@ -11,7 +11,7 @@
     {
       "title": "Breast cancer detection using artificial intelligence techniques: A systematic literature review",
       "authors": "Ali Bou Nassif and Manar Abu Talib and Qassim Nasir and Yaman Afadar and Omar Elgendy",
-      "venue": "Artificial Intelligence in Medicine",
+      "venue": "Unknown Venue",
       "year": 2022,
       "citations": 338,
       "url": "https://www.sciencedirect.com/science/article/pii/S0933365722000410"
@@ -19,7 +19,7 @@
     {
       "title": "Arabic fake news detection based on deep contextualized embedding models",
       "authors": "Ali Bou Nassif and Ashraf Elnagar and Omar Elgendy and Yaman Afadar",
-      "venue": "Neural Computing and Applications - Springer",
+      "venue": "Neural Computing and Applications",
       "year": 2022,
       "citations": 89,
       "url": "https://link.springer.com/article/10.1007/s00521-022-07206-4"
@@ -27,7 +27,7 @@
     {
       "title": "Death/recovery prediction for covid-19 patients using machine learning",
       "authors": "Omar Atef and AB Nassif and MA Talib and Q Nassir",
-      "venue": "ResearchGate",
+      "venue": "International Journal of Systems Applications, Engineering & Development",
       "year": 2020,
       "citations": 8,
       "url": "https://www.researchgate.net/profile/Ali-Nassif/publication/348433156_DeathRecovery_Prediction_for_Covid-19_Patients_using_Machine_Learning/links/5ffee666a6fdccdcb84de56d/Death-Recovery-Prediction-for-Covid-19-Patients-using-Machine-Learning.pdf"
@@ -35,10 +35,26 @@
     {
       "title": "Alzheimer detection using different deep learning methods with MRI images",
       "authors": "Omar Elgendy and Ali Bou Nassif",
-      "venue": "2023 Advances in Science and Engineering Technology International Conferences (ASET) - IEEE",
+      "venue": "Unknown Venue",
       "year": 2023,
       "citations": 3,
       "url": "https://ieeexplore.ieee.org/abstract/document/10180640/"
+    },
+    {
+      "title": "Text toxicity level detection using deep contextualized embedding models",
+      "authors": "Omar Elgendy and Ali Bou Nassif and Bassel Soudan",
+      "venue": "Unknown Venue",
+      "year": 2024,
+      "citations": 1,
+      "url": "https://scholar.google.com/scholar?cluster=11398924701268071726&hl=en&oi=scholarr"
+    },
+    {
+      "title": "Heart Failure Prediction using Machine learning with Metaheuristic feature selection techniques",
+      "authors": "Omar Elgendy and Ali Bou Nassif and Bassel Soudan",
+      "venue": "Unknown Venue",
+      "year": 2024,
+      "citations": 1,
+      "url": "https://www.researchgate.net/profile/Omar-Elgendy-4/publication/384450466_Heart_Failure_Prediction_using_Machine_learning_with_Metaheuristic_feature_selection_techniques/links/68203e47d1054b0207ee2c20/Heart-Failure-Prediction-Using-Machine-Learning-with-Metaheuristic-Feature-Selection-Techniques.pdf"
     }
   ],
   "total_publications": 6,

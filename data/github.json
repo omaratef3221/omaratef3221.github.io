@@ -5,7 +5,7 @@
       "description": "Here we will have multiple PyTorch Exercises written in Jupyter notebooks from beginner to advanced",
       "html_url": "https://github.com/omaratef3221/pytorch_tutorials",
       "language": "Jupyter Notebook",
-      "topics": ["pytorch", "deep-learning", "neural-networks", "ml"],
+      "topics": [],
       "stars": 85,
       "forks": 44,
       "owner": "omaratef3221"
@@ -15,7 +15,7 @@
       "description": "SQL Query generator using Qwen2-1.5B instruct",
       "html_url": "https://github.com/omaratef3221/SQL_Query_Generator_llm",
       "language": "Jupyter Notebook",
-      "topics": ["llm", "nlp", "sql", "generative-ai"],
+      "topics": [],
       "stars": 8,
       "forks": 4,
       "owner": "omaratef3221"
@@ -25,7 +25,7 @@
       "description": "Here we will have multiple TensorFlow Exercises written in Jupyter notebooks from beginner to advanced",
       "html_url": "https://github.com/omaratef3221/tensorflow_tutorials",
       "language": "Jupyter Notebook",
-      "topics": ["tensorflow", "deep-learning", "neural-networks", "ml"],
+      "topics": [],
       "stars": 8,
       "forks": 3,
       "owner": "omaratef3221"
@@ -35,7 +35,11 @@
       "description": "Podcast Summarizer Agent will have LLMs, RAGs, MongoDB, Chatbot, Flutter Mobile app",
       "html_url": "https://github.com/omaratef3221/podcast-summarizer-agent",
       "language": "Python",
-      "topics": ["agentic-ai", "agentic-workflow", "generative-ai"],
+      "topics": [
+        "agentic-ai",
+        "agentic-workflow",
+        "generative-ai"
+      ],
       "stars": 6,
       "forks": 1,
       "owner": "omaratef3221"
@@ -45,17 +49,17 @@
       "description": "Thinking of any movie talking about a certain story? Find the closest movie here!",
       "html_url": "https://github.com/omaratef3221/find-a-movie",
       "language": "Jupyter Notebook",
-      "topics": ["ml", "recommendation-system"],
+      "topics": [],
       "stars": 2,
       "forks": 2,
       "owner": "omaratef3221"
     },
     {
       "name": "youtube_downloader",
-      "description": "YouTube video downloader tool",
+      "description": null,
       "html_url": "https://github.com/omaratef3221/youtube_downloader",
       "language": "Python",
-      "topics": ["python", "utility"],
+      "topics": [],
       "stars": 2,
       "forks": 1,
       "owner": "omaratef3221"
