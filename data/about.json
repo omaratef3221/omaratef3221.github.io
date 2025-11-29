@@ -1,0 +1,20 @@
+{
+  "about": {
+    "title": "About Me",
+    "subtitle": "Passionate about AI and Machine Learning",
+    "description": [
+      "Experienced Machine Learning Engineer and Data Scientist with 5+ years of delivering production-ready AI solutions across Machine Learning, Natural Language Processing, and Computer Vision. Specialized in scalable MLOps, cloud deployment, and model optimization.",
+      "I have deep expertise in fine-tuning large-scale transformer and deep learning models using advanced methods like QLoRA, LoRA, and RLHF. Successfully integrated AI solutions into real-world products, driving measurable gains in accuracy, efficiency, and business outcomes."
+    ],
+    "education": {
+      "degree": "M.Sc. Computer Engineering (AI)",
+      "institution": "University of Sharjah"
+    },
+    "location": "Dubai, United Arab Emirates",
+    "interests": [
+      "Generative AI & LLMs",
+      "MLOps & Cloud Deployment",
+      "Research & Innovation"
+    ]
+  }
+}
