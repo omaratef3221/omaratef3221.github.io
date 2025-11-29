@@ -1,8 +1,18 @@
 {
   "experience": [
     {
-      "period": "2023 - Present",
-      "title": "Machine Learning Engineer",
+      "period": "2025 - Present",
+      "title": "Machine Learning Specialist",
+      "company": "Virtue Therapy, Dubai, UAE",
+      "achievements": [
+        "Developed and deployed production-grade Machine Learning application for improving flight-addons profit by 55%",
+        "Worked on building Reinforcement Learning for Google Ads Bids Enhancement that reduced cost by 30%",
+        "Built scalable MLOps pipelines utlizing AWS SageMaker and MlFlow"
+      ]
+    },
+    {
+      "period": "2023 - 2025",
+      "title": "R&D Machine Learning Engineer",
       "company": "Virtue Therapy, Dubai, UAE",
       "achievements": [
         "Developed and deployed production-grade LLM applications achieving over 85% accuracy",

@@ -1,0 +1,46 @@
+{
+  "profile": {
+    "name": "Omar Elgendy",
+    "affiliation": "AI Engineer and Researcher",
+    "citedby": 440,
+    "hindex": 3,
+    "i10index": 2,
+    "scholar_url": "https://scholar.google.com/citations?user=lw70gLkAAAAJ&hl=en"
+  },
+  "publications": [
+    {
+      "title": "Breast cancer detection using artificial intelligence techniques: A systematic literature review",
+      "authors": "Ali Bou Nassif and Manar Abu Talib and Qassim Nasir and Yaman Afadar and Omar Elgendy",
+      "venue": "Artificial Intelligence in Medicine",
+      "year": 2022,
+      "citations": 338,
+      "url": "https://www.sciencedirect.com/science/article/pii/S0933365722000410"
+    },
+    {
+      "title": "Arabic fake news detection based on deep contextualized embedding models",
+      "authors": "Ali Bou Nassif and Ashraf Elnagar and Omar Elgendy and Yaman Afadar",
+      "venue": "Neural Computing and Applications - Springer",
+      "year": 2022,
+      "citations": 89,
+      "url": "https://link.springer.com/article/10.1007/s00521-022-07206-4"
+    },
+    {
+      "title": "Death/recovery prediction for covid-19 patients using machine learning",
+      "authors": "Omar Atef and AB Nassif and MA Talib and Q Nassir",
+      "venue": "ResearchGate",
+      "year": 2020,
+      "citations": 8,
+      "url": "https://www.researchgate.net/profile/Ali-Nassif/publication/348433156_DeathRecovery_Prediction_for_Covid-19_Patients_using_Machine_Learning/links/5ffee666a6fdccdcb84de56d/Death-Recovery-Prediction-for-Covid-19-Patients-using-Machine-Learning.pdf"
+    },
+    {
+      "title": "Alzheimer detection using different deep learning methods with MRI images",
+      "authors": "Omar Elgendy and Ali Bou Nassif",
+      "venue": "2023 Advances in Science and Engineering Technology International Conferences (ASET) - IEEE",
+      "year": 2023,
+      "citations": 3,
+      "url": "https://ieeexplore.ieee.org/abstract/document/10180640/"
+    }
+  ],
+  "total_publications": 6,
+  "last_updated": "2025-11-29"
+}

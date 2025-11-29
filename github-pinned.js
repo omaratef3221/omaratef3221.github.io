@@ -1,64 +1,33 @@
-// GitHub Pinned Repositories Integration
-// This file fetches and displays pinned repositories from GitHub profile
+// GitHub Repositories Integration - JSON-based Static Version
+// This file reads GitHub data from data/github.json
 
-const GITHUB_USERNAME = 'omaratef3221';
-
-// Fallback data for GitHub Pages (static hosting)
-const FALLBACK_GITHUB_DATA = [
-    {
-        name: "pytorch_tutorials",
-        description: "Collection of PyTorch tutorials and implementations for deep learning",
-        html_url: "https://github.com/omaratef3221/pytorch_tutorials",
-        language: "Python",
-        topics: ["pytorch", "deep-learning", "neural-networks", "ml"],
-        stars: 73,
-        forks: 12,
-        owner: "omaratef3221"
-    },
-    {
-        name: "SQL_Query_Generator_llm",
-        description: "Natural language to SQL query generator using LLMs",
-        html_url: "https://github.com/omaratef3221/SQL_Query_Generator_llm",
-        language: "Python",
-        topics: ["llm", "nlp", "sql", "generative-ai"],
-        stars: 15,
-        forks: 3,
-        owner: "omaratef3221"
-    },
-    {
-        name: "podcast-summarizer-agent",
-        description: "AI agent for summarizing podcast episodes using LLMs",
-        html_url: "https://github.com/omaratef3221/podcast-summarizer-agent",
-        language: "Python",
-        topics: ["nlp", "llm", "summarization", "ai-agents"],
-        stars: 8,
-        forks: 2,
-        owner: "omaratef3221"
-    }
-];
+const GITHUB_JSON_PATH = 'data/github.json';
 
 async function fetchGitHubPinned() {
     try {
-        // Try to fetch from Flask backend if available (local development)
-        const response = await fetch(`/api/github/${GITHUB_USERNAME}/pinned`);
+        console.log('Fetching GitHub data from JSON file...');
+        const response = await fetch(GITHUB_JSON_PATH);
 
         if (!response.ok) {
-            throw new Error('Backend not available');
+            throw new Error('Failed to load GitHub data');
         }
 
         const data = await response.json();
+        console.log('GitHub data loaded from JSON successfully');
 
-        if (data.pinned_repositories && data.pinned_repositories.length > 0) {
-            updateProjectsWithPinned(data.pinned_repositories);
-            console.log('GitHub pinned repositories loaded from backend successfully');
+        if (data.repositories && data.repositories.length > 0) {
+            updateProjectsWithPinned(data.repositories);
         } else {
-            console.log('No pinned repositories found, using fallback data');
-            updateProjectsWithPinned(FALLBACK_GITHUB_DATA);
+            throw new Error('No repositories found in JSON');
         }
+
     } catch (error) {
-        console.log('Backend not available, using fallback data for GitHub Pages');
-        // Use fallback data for GitHub Pages deployment
-        updateProjectsWithPinned(FALLBACK_GITHUB_DATA);
+        console.error('Error loading GitHub data:', error);
+        // Show error message to user
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid) {
+            projectsGrid.innerHTML = '<p style="color: #ff4444; text-align: center;">Unable to load projects. Please try again later.</p>';
+        }
     }
 }
 
@@ -102,7 +71,7 @@ function updateProjectsWithPinned(pinnedRepos) {
                     <span><i class="fas fa-star"></i> ${repo.stars}</span>
                     <span><i class="fas fa-code-branch"></i> ${repo.forks}</span>
                 </div>
-                ${repo.owner !== GITHUB_USERNAME ? `<div class="project-owner">by ${repo.owner}</div>` : ''}
+                ${repo.owner !== 'omaratef3221' ? `<div class="project-owner">by ${repo.owner}</div>` : ''}
             </div>
         `;
 
@@ -180,10 +149,12 @@ ownerStyle.textContent = `
 `;
 document.head.appendChild(ownerStyle);
 
-// Load pinned repos when DOM is ready
+// Load GitHub data when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - github-pinned.js');
     // Wait a bit for other scripts to load
     setTimeout(() => {
+        console.log('Fetching GitHub data now...');
         fetchGitHubPinned();
     }, 1000);
 });

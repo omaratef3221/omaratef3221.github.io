@@ -1,77 +1,35 @@
-// Google Scholar Integration
-// This file handles displaying Google Scholar data
+// Google Scholar Integration - JSON-based Static Version
+// This file reads Google Scholar data from data/scholar.json
 
-const SCHOLAR_USER_ID = 'lw70gLkAAAAJ'; // Omar's Google Scholar ID
-const SCHOLAR_URL = `https://scholar.google.com/citations?user=${SCHOLAR_USER_ID}&hl=en`;
+const SCHOLAR_JSON_PATH = 'data/scholar.json';
 
-// Fallback data for GitHub Pages (static hosting)
-const FALLBACK_SCHOLAR_DATA = {
-    profile: {
-        name: "Omar Elgendy",
-        affiliation: "AI Engineer and Researcher",
-        citedby: 438,
-        hindex: 3,
-        i10index: 2,
-        scholar_url: SCHOLAR_URL
-    },
-    top_publications: [
-        {
-            title: "Breast cancer detection using artificial intelligence techniques: A systematic literature review",
-            authors: "Ali Bou Nassif and Manar Abu Talib and Qassim Nasir and Yaman Afadar and Omar Elgendy",
-            venue: "Artificial Intelligence in Medicine",
-            year: 2022,
-            citations: 336,
-            url: "https://www.sciencedirect.com/science/article/pii/S0933365722000410"
-        },
-        {
-            title: "Arabic fake news detection based on deep contextualized embedding models",
-            authors: "Ali Bou Nassif, Ashraf Elnagar, Omar Elgendy, and Yaman Afadar",
-            venue: "Neural Computing and Applications - Springer",
-            year: 2022,
-            citations: 89,
-            url: "https://link.springer.com/article/10.1007/s00521-022-07206-4"
-        },
-        {
-            title: "Alzheimer Detection using Different Deep Learning Methods with MRI Images",
-            authors: "O. Elgendy and A. B. Nassif",
-            venue: "2023 Advances in Science and Engineering Technology International Conferences (ASET) - IEEE",
-            year: 2023,
-            citations: 45,
-            url: "https://ieeexplore.ieee.org/document/10180640/"
-        },
-        {
-            title: "Heart Failure Prediction using Machine learning with Meta-heuristic feature selection techniques",
-            authors: "O. Elgendy, A. B. Nassif, and B. Soudan",
-            venue: "The 2024 OkIP International Conference on Advances in Health Information Technology (AHIT)",
-            year: 2024,
-            citations: 12,
-            url: "https://doi.org/10.55432/978-1-6692-0007-9_4"
-        }
-    ],
-    total_publications: 6
-};
+let currentPublications = [];
+let currentSortMode = 'citations'; // Default to citations
+let currentPage = 1;
+const PUBLICATIONS_PER_PAGE = 3;
 
 async function fetchScholarData() {
     try {
-        // Try to fetch from Flask backend if available (local development)
-        const response = await fetch(`/api/scholar/${SCHOLAR_USER_ID}`);
+        console.log('Fetching scholar data from JSON file...');
+        const response = await fetch(SCHOLAR_JSON_PATH);
 
         if (!response.ok) {
-            throw new Error('Backend not available');
+            throw new Error('Failed to load scholar data');
         }
 
-        const data = await response.json();
-        const scholarData = data.fallback ? data.data : data;
+        const scholarData = await response.json();
+        console.log('Scholar data loaded from JSON successfully');
 
         updateScholarStats(scholarData);
         updatePublicationsList(scholarData);
 
-        console.log('Google Scholar data loaded from backend successfully');
     } catch (error) {
-        console.log('Backend not available, using fallback data for GitHub Pages');
-        // Use fallback data for GitHub Pages deployment
-        updateScholarStats(FALLBACK_SCHOLAR_DATA);
-        updatePublicationsList(FALLBACK_SCHOLAR_DATA);
+        console.error('Error loading scholar data:', error);
+        // Show error message to user
+        const publicationsGrid = document.querySelector('.publications-grid');
+        if (publicationsGrid) {
+            publicationsGrid.innerHTML = '<p style="color: #ff4444; text-align: center;">Unable to load publications. Please try again later.</p>';
+        }
     }
 }
 
@@ -88,7 +46,7 @@ function updateScholarStats(scholarData) {
 
     const citationsHeroStat = document.querySelector('.hero-stats .stat:nth-child(3) .stat-number');
     if (citationsHeroStat) {
-        animateCounter(citationsHeroStat, profile.citedby || 350);
+        animateCounter(citationsHeroStat, profile.citedby || 440);
     }
 
     // Update publications section stats
@@ -104,7 +62,7 @@ function updateScholarStats(scholarData) {
     if (statCards.length >= 2) {
         const citationsCount = statCards[1].querySelector('h3');
         if (citationsCount) {
-            animateCounter(citationsCount, profile.citedby || 350);
+            animateCounter(citationsCount, profile.citedby || 440);
         }
     }
 
@@ -139,16 +97,93 @@ function animateCounter(element, targetValue) {
 }
 
 function updatePublicationsList(scholarData) {
-    if (!scholarData || !scholarData.top_publications) return;
+    if (!scholarData || !scholarData.publications) return;
 
+    // Store publications for filtering
+    currentPublications = scholarData.publications;
+    currentPage = 1; // Reset to first page
+
+    // Add filter buttons and pagination before displaying
+    addFilterButtons(scholarData);
+
+    // Display publications with current sort
+    displayPublications(scholarData);
+
+    // Add "View More" link after the publications grid
+    addViewMoreLink(scholarData);
+}
+
+function addFilterButtons(scholarData) {
+    const publicationsSection = document.querySelector('#publications .container');
+    if (!publicationsSection) return;
+
+    // Remove existing filter buttons if present
+    const existingFilter = document.getElementById('publication-filter');
+    if (existingFilter) {
+        existingFilter.remove();
+    }
+
+    // Create filter buttons container (positioned at top right)
+    const filterDiv = document.createElement('div');
+    filterDiv.id = 'publication-filter';
+    filterDiv.className = 'publication-filter';
+    filterDiv.innerHTML = `
+        <div class="filter-label">Sort by:</div>
+        <button class="filter-btn ${currentSortMode === 'citations' ? 'active' : ''}" data-sort="citations">
+            <i class="fas fa-quote-right"></i> Citations
+        </button>
+        <button class="filter-btn ${currentSortMode === 'date' ? 'active' : ''}" data-sort="date">
+            <i class="fas fa-calendar"></i> Date
+        </button>
+    `;
+
+    // Insert after section header, before publications grid
+    const sectionHeader = publicationsSection.querySelector('.section-header');
+    if (sectionHeader) {
+        sectionHeader.appendChild(filterDiv);
+    }
+
+    // Add click handlers
+    const filterButtons = filterDiv.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const sortMode = btn.getAttribute('data-sort');
+            currentSortMode = sortMode;
+            currentPage = 1; // Reset to first page when sorting changes
+
+            // Update active state
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Re-display with new sort
+            displayPublications(scholarData);
+        });
+    });
+}
+
+function displayPublications(scholarData) {
     const publicationsGrid = document.querySelector('.publications-grid');
     if (!publicationsGrid) return;
+
+    // Sort publications based on current mode
+    let sortedPubs = [...currentPublications];
+    if (currentSortMode === 'citations') {
+        sortedPubs.sort((a, b) => b.citations - a.citations);
+    } else if (currentSortMode === 'date') {
+        sortedPubs.sort((a, b) => b.year - a.year);
+    }
+
+    // Calculate pagination
+    const totalPages = Math.ceil(sortedPubs.length / PUBLICATIONS_PER_PAGE);
+    const startIndex = (currentPage - 1) * PUBLICATIONS_PER_PAGE;
+    const endIndex = startIndex + PUBLICATIONS_PER_PAGE;
+    const paginatedPubs = sortedPubs.slice(startIndex, endIndex);
 
     // Clear existing publications
     publicationsGrid.innerHTML = '';
 
-    // Add top 4 publications from scholar data
-    scholarData.top_publications.forEach(pub => {
+    // Add publications for current page
+    paginatedPubs.forEach(pub => {
         const publicationCard = document.createElement('div');
         publicationCard.className = 'publication-card';
 
@@ -158,6 +193,9 @@ function updatePublicationsList(scholarData) {
                 <h3 class="publication-title">${pub.title}</h3>
                 <p class="publication-authors">${pub.authors}</p>
                 <p class="publication-venue">${pub.venue}</p>
+                <div class="publication-citations">
+                    <i class="fas fa-quote-right"></i> Cited by ${pub.citations}
+                </div>
                 ${pub.url ? `<a href="${pub.url}" target="_blank" class="publication-link">
                     <i class="fas fa-external-link-alt"></i> View Publication
                 </a>` : ''}
@@ -167,29 +205,105 @@ function updatePublicationsList(scholarData) {
         publicationsGrid.appendChild(publicationCard);
     });
 
-    // Add "View More" link after the publications grid
-    addViewMoreLink(scholarData);
+    // Add pagination controls
+    addPaginationControls(totalPages, scholarData);
+}
+
+function addPaginationControls(totalPages, scholarData) {
+    const publicationsSection = document.querySelector('#publications .container');
+    if (!publicationsSection) return;
+
+    // Remove existing pagination if present
+    const existingPagination = document.getElementById('publications-pagination');
+    if (existingPagination) {
+        existingPagination.remove();
+    }
+
+    // Only show pagination if more than one page
+    if (totalPages <= 1) return;
+
+    // Create pagination container
+    const paginationDiv = document.createElement('div');
+    paginationDiv.id = 'publications-pagination';
+    paginationDiv.className = 'publications-pagination';
+
+    // Create pagination buttons
+    let paginationHTML = '';
+
+    // Previous button
+    paginationHTML += `
+        <button class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}"
+                data-page="${currentPage - 1}"
+                ${currentPage === 1 ? 'disabled' : ''}>
+            <i class="fas fa-chevron-left"></i> Previous
+        </button>
+    `;
+
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+        paginationHTML += `
+            <button class="pagination-btn page-number ${currentPage === i ? 'active' : ''}"
+                    data-page="${i}">
+                ${i}
+            </button>
+        `;
+    }
+
+    // Next button
+    paginationHTML += `
+        <button class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}"
+                data-page="${currentPage + 1}"
+                ${currentPage === totalPages ? 'disabled' : ''}>
+            Next <i class="fas fa-chevron-right"></i>
+        </button>
+    `;
+
+    paginationDiv.innerHTML = paginationHTML;
+
+    // Insert after publications grid, before view more link
+    const publicationsGrid = publicationsSection.querySelector('.publications-grid');
+    const viewMoreLink = document.getElementById('view-more-publications');
+
+    if (viewMoreLink) {
+        publicationsSection.insertBefore(paginationDiv, viewMoreLink);
+    } else if (publicationsGrid) {
+        publicationsGrid.after(paginationDiv);
+    }
+
+    // Add click handlers
+    const paginationButtons = paginationDiv.querySelectorAll('.pagination-btn');
+    paginationButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.disabled) return;
+
+            const page = parseInt(btn.getAttribute('data-page'));
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                displayPublications(scholarData);
+
+                // Scroll to publications section
+                const publicationsSection = document.getElementById('publications');
+                if (publicationsSection) {
+                    publicationsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
 }
 
 function addViewMoreLink(scholarData) {
-    console.log('addViewMoreLink called with data:', scholarData);
-
     // Check if we have the scholar URL
     const scholarUrl = scholarData.profile?.scholar_url || 'https://scholar.google.com/citations?user=lw70gLkAAAAJ&hl=en';
-    console.log('Scholar URL:', scholarUrl);
 
     // Find the publications section
     const publicationsSection = document.querySelector('#publications .container');
-    console.log('Publications section found:', publicationsSection);
     if (!publicationsSection) {
-        console.error('Publications section not found!');
         return;
     }
 
     // Remove existing view more link if present
     const existingLink = document.getElementById('view-more-publications');
     if (existingLink) {
-        console.log('Removing existing view more link');
         existingLink.remove();
     }
 
@@ -203,27 +317,35 @@ function addViewMoreLink(scholarData) {
         </a>
     `;
 
-    // Insert after publications grid, before research stats
+    // Insert after pagination (or publications grid if no pagination), before research stats
     const researchStats = publicationsSection.querySelector('.research-stats');
-    console.log('Research stats found:', researchStats);
     if (researchStats) {
         publicationsSection.insertBefore(viewMoreDiv, researchStats);
-        console.log('View More button inserted before research stats');
     } else {
         publicationsSection.appendChild(viewMoreDiv);
-        console.log('View More button appended to publications section');
     }
-}
-
-function updateScholarStatsFromHTML() {
-    // Fallback: keep existing static values
-    console.log('Using static Google Scholar data from HTML');
 }
 
 // Load scholar data when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - scholar-integration.js');
     // Wait a bit for other scripts to load
     setTimeout(() => {
+        console.log('Fetching scholar data now...');
         fetchScholarData();
     }, 500);
+});
+
+// Also try when window loads (backup)
+window.addEventListener('load', function() {
+    console.log('Window loaded - checking if scholar data is loaded');
+    const filterExists = document.getElementById('publication-filter');
+    const viewMoreExists = document.getElementById('view-more-publications');
+
+    if (!filterExists || !viewMoreExists) {
+        console.log('Filter or View More button missing, fetching again...');
+        setTimeout(() => {
+            fetchScholarData();
+        }, 100);
+    }
 });

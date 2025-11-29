@@ -1363,6 +1363,135 @@ section:not(:last-child) {
     align-items: center;
 }
 
+/* Section header with filter buttons */
+.section-header {
+    position: relative;
+}
+
+/* Publication Filter Buttons - Top Right Position */
+.publication-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 212, 255, 0.08);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 212, 255, 0.25);
+}
+
+.filter-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--secondary-color);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--background-dark);
+    font-weight: 600;
+}
+
+.filter-btn i {
+    font-size: 0.85rem;
+}
+
+/* Publication Citations Badge */
+.publication-citations {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.5rem 0;
+    padding: 0.4rem 0.8rem;
+    background: rgba(0, 255, 136, 0.1);
+    border-left: 3px solid var(--accent-color);
+    color: var(--accent-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.publication-citations i {
+    font-size: 0.75rem;
+}
+
+/* Publications Pagination */
+.publications-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+}
+
+.pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 44px;
+    justify-content: center;
+}
+
+.pagination-btn:hover:not(.disabled) {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--secondary-color);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.pagination-btn.active {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--background-dark);
+    font-weight: 700;
+}
+
+.pagination-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-btn.page-number {
+    min-width: 44px;
+}
+
 /* View More Publications button */
 .view-more-container {
     text-align: center;
