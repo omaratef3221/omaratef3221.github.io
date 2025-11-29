@@ -3,130 +3,129 @@
     {
       "name": "Machine Learning",
       "level": 9,
-      "category": "AI & ML"
+      "category": "Core AI"
     },
     {
       "name": "Deep Learning",
       "level": 9,
-      "category": "AI & ML"
-    },
-    {
-      "name": "PyTorch",
-      "level": 9,
-      "category": "Frameworks"
-    },
-    {
-      "name": "TensorFlow",
-      "level": 8,
-      "category": "Frameworks"
+      "category": "Core AI"
     },
     {
       "name": "NLP",
       "level": 9,
-      "category": "AI & ML"
-    },
-        {
-      "name": "Agentic AI",
-      "level": 9,
-      "category": "AI & ML"
+      "category": "Core AI"
     },
     {
       "name": "LLMs",
       "level": 9,
-      "category": "AI & ML"
+      "category": "Core AI"
     },
-        {
+    {
+      "name": "Agentic AI",
+      "level": 9,
+      "category": "Core AI"
+    },
+    {
       "name": "RAGs",
       "level": 9,
-      "category": "AI & ML"
-    },
-    {
-      "name": "AWS",
-      "level": 9,
-      "category": "Cloud & DevOps"
-    },
-    {
-      "name": "GCP",
-      "level": 7,
-      "category": "Cloud & DevOps"
-    },
-    {
-      "name": "MLOps",
-      "level": 8,
-      "category": "Cloud & DevOps"
-    },
-    {
-      "name": "Airflow",
-      "level": 8,
-      "category": "Cloud & DevOps"
-    },
-    {
-      "name": "Docker",
-      "level": 8,
-      "category": "Cloud & DevOps"
-    },
-    {
-      "name": "SQL",
-      "level": 8,
-      "category": "Data & Databases"
-    },
-    {
-      "name": "Data Analysis",
-      "level": 9,
-      "category": "Data & Databases"
+      "category": "Core AI"
     },
     {
       "name": "Computer Vision",
       "level": 8,
-      "category": "AI & ML"
+      "category": "Core AI"
+    },
+
+    {
+      "name": "PyTorch",
+      "level": 9,
+      "category": "AI Frameworks"
+    },
+    {
+      "name": "TensorFlow",
+      "level": 8,
+      "category": "AI Frameworks"
     },
     {
       "name": "Scikit-learn",
       "level": 9,
-      "category": "Frameworks"
-    },
-    {
-      "name": "LangChain",
-      "level": 8,
-      "category": "Frameworks"
+      "category": "AI Frameworks"
     },
     {
       "name": "Transformers",
       "level": 8,
-      "category": "Frameworks"
+      "category": "AI Frameworks"
+    },
+    {
+      "name": "LangChain",
+      "level": 8,
+      "category": "AI Frameworks"
     },
     {
       "name": "LangGraph",
       "level": 8,
-      "category": "Frameworks"
+      "category": "AI Frameworks"
+    },
+
+    {
+      "name": "AWS",
+      "level": 9,
+      "category": "Cloud & MLOps"
     },
     {
-      "name": "NumPy",
-      "level": 9,
-      "category": "Frameworks"
+      "name": "GCP",
+      "level": 7,
+      "category": "Cloud & MLOps"
     },
     {
-      "name": "Git",
-      "level": 9,
-      "category": "Tools"
+      "name": "MLOps",
+      "level": 8,
+      "category": "Cloud & MLOps"
     },
     {
-      "name": "Sagemaker",
+      "name": "SageMaker",
       "level": 9,
-      "category": "Tools"
+      "category": "Cloud & MLOps"
+    },
+    {
+      "name": "Airflow",
+      "level": 8,
+      "category": "Cloud & MLOps"
+    },
+    {
+      "name": "Docker",
+      "level": 8,
+      "category": "Cloud & MLOps"
+    },
+
+    {
+      "name": "SQL",
+      "level": 8,
+      "category": "Data Engineering"
     },
     {
       "name": "Pandas",
       "level": 9,
-      "category": "Data & Databases"
+      "category": "Data Engineering"
     },
     {
-      "name": "Grafana and Prometheus",
+      "name": "NumPy",
+      "level": 9,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "Data Analysis",
+      "level": 9,
+      "category": "Data Engineering"
+    },
+
+    {
+      "name": "Grafana",
       "level": 6,
       "category": "Monitoring"
     },
     {
-      "name": "Grafana",
+      "name": "Prometheus",
       "level": 6,
       "category": "Monitoring"
     },
@@ -135,25 +134,36 @@
       "level": 6,
       "category": "Monitoring"
     },
+
+    {
+      "name": "Git",
+      "level": 9,
+      "category": "Tools"
+    },
     {
       "name": "Linux",
       "level": 8,
-      "category": "Misc"
+      "category": "Tools"
     },
     {
       "name": "Flask",
       "level": 8,
-      "category": "Misc"
+      "category": "Backend"
     },
     {
       "name": "FastAPI",
       "level": 6,
-      "category": "Misc"
+      "category": "Backend"
     },
     {
-      "name": "GRCP",
+      "name": "gRPC",
       "level": 6,
-      "category": "Misc"
+      "category": "Backend"
+    },
+    {
+      "name": "MongoDB",
+      "level": 6,
+      "category": "Data Engineering"
     }
   ]
 }
