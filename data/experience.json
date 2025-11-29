@@ -7,9 +7,9 @@
       "location": "Dubai, United Arab Emirates",
       "logo": "assets/images/companies/almosafer.png",
       "achievements": [
-        "Developed and deployed production-grade Machine Learning application for improving flight-addons profit by 55%",
-        "Worked on building Reinforcement Learning for Google Ads Bids Enhancement that reduced cost by 30%",
-        "Built scalable MLOps pipelines utlizing AWS SageMaker and MlFlow"
+        "Built and deployed a production ML system that lifted flight add-on profits by 55%",
+        "Designed a reinforcement learning solution for Google Ads bidding that cut acquisition costs by 30%",
+        "Developed scalable MLOps pipelines using AWS SageMaker and MLflow to automate training and deployment"
       ]
     },
     {
