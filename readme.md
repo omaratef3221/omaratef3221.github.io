@@ -1,10 +1,32 @@
-# Omar's Automated Portfolio Website - Project Complete! 🎉
+# Omar Elgendy - Portfolio Website 🎉
 
 ## 🎯 Project Overview
 
-I have successfully recreated Omar Elgendy's portfolio website with **full API automation** that dynamically fetches and updates content from LinkedIn, GitHub, and Google Scholar. The website now maintains itself automatically without any manual updates needed!
+A modern, responsive portfolio website showcasing Machine Learning Engineering expertise, research publications, and projects. The website works both with Flask backend (local development) and as a static site on GitHub Pages (production deployment).
 
-## ✨ API Integration Success
+## 🚀 GitHub Pages Deployment
+
+This website is ready to deploy to GitHub Pages! See the complete deployment guide:
+
+**📘 [GITHUB_PAGES_DEPLOYMENT.md](GITHUB_PAGES_DEPLOYMENT.md) - Complete step-by-step guide**
+
+**Quick Summary:**
+1. The website includes fallback data for static hosting
+2. Publications show **top 4 most cited papers** with **"View All Publications" button**
+3. Contact form uses Formspree (free service)
+4. All features work without backend on GitHub Pages
+
+## ✨ Key Features
+
+- 📊 **Top 4 Most Cited Publications** - Automatically sorted by citations
+- 🔗 **View All Publications Button** - Links to full Google Scholar profile (opens in new tab)
+- 💼 **GitHub Projects** - Showcases your top repositories
+- 📝 **JSON-Based Experience** - Easy to update work history
+- 📧 **Working Contact Form** - Powered by Formspree
+- 📱 **Fully Responsive** - Mobile-friendly design
+- ⚡ **Fast Loading** - Optimized for GitHub Pages
+
+## ✨ API Integration (Local Development Only)
 
 ### 🔗 LinkedIn API Integration ✅
 - **Status**: Fully Working

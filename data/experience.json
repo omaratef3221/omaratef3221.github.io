@@ -1,0 +1,37 @@
+{
+  "experience": [
+    {
+      "period": "2023 - Present",
+      "title": "Machine Learning Engineer",
+      "company": "Virtue Therapy, Dubai, UAE",
+      "achievements": [
+        "Developed and deployed production-grade LLM applications achieving over 85% accuracy",
+        "Fine-tuned transformer models with QLoRA and LoRA, improving task accuracy by up to 18%",
+        "Built scalable MLOps pipelines on AWS SageMaker, cutting deployment time by 30%",
+        "Deployed serverless AI APIs using Docker and AWS Lambda, reducing hosting costs by 25%"
+      ]
+    },
+    {
+      "period": "2021 - 2023",
+      "title": "Junior Machine Learning Engineer",
+      "company": "Virtue Therapy, Dubai, UAE",
+      "achievements": [
+        "Built ML models for user behavior prediction, improving engagement insights by 30%",
+        "Led end-to-end ML workflows using Scikit-learn, TensorFlow, and PyTorch",
+        "Implemented experiment tracking and model versioning for better reproducibility",
+        "Designed classic ML models improving prediction accuracy by up to 22%"
+      ]
+    },
+    {
+      "period": "2020 - 2021",
+      "title": "Research Assistant",
+      "company": "University of Sharjah, UAE",
+      "achievements": [
+        "Authored 6+ peer-reviewed AI research papers with over 350 total citations",
+        "Developed optimized Arabic text summarization approach reducing training time by 45%",
+        "Created BERT-based models for Arabic fake news detection achieving 90%+ accuracy",
+        "Designed Deep Learning architectures for Alzheimer's detection using MRI"
+      ]
+    }
+  ]
+}

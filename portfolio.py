@@ -257,23 +257,23 @@ def get_fallback_linkedin_data():
 def get_github_profile(username):
     """Get GitHub profile and repositories data"""
     cache_key = f"github_{username}"
-    
+
     # Check cache first
     cached_data = get_cached_data(cache_key)
     if cached_data:
         return jsonify(cached_data)
-    
+
     try:
         # Get user profile
         profile_response = requests.get(f'https://api.github.com/users/{username}')
         profile_response.raise_for_status()
         profile_data = profile_response.json()
-        
+
         # Get repositories
         repos_response = requests.get(f'https://api.github.com/users/{username}/repos?sort=stars&per_page=20')
         repos_response.raise_for_status()
         repos_data = repos_response.json()
-        
+
         # Process the data
         processed_data = {
             'profile': {
@@ -291,7 +291,7 @@ def get_github_profile(username):
             },
             'repositories': []
         }
-        
+
         # Process repositories
         for repo in repos_data:
             if not repo.get('fork', False):  # Exclude forked repositories
@@ -309,15 +309,15 @@ def get_github_profile(username):
                     'topics': repo.get('topics', [])
                 }
                 processed_data['repositories'].append(repo_data)
-        
+
         # Sort repositories by stars
         processed_data['repositories'].sort(key=lambda x: x['stars'], reverse=True)
-        
+
         # Cache the result
         set_cache_data(cache_key, processed_data)
-        
+
         return jsonify(processed_data)
-        
+
     except requests.exceptions.RequestException as e:
         print(f"Error fetching GitHub data: {str(e)}")
         return jsonify({
@@ -325,6 +325,152 @@ def get_github_profile(username):
             'fallback': True,
             'data': get_fallback_github_data()
         }), 200
+
+@portfolio_bp.route('/github/<username>/starred', methods=['GET'])
+@cross_origin()
+def get_github_starred(username):
+    """Get GitHub starred repositories"""
+    cache_key = f"github_starred_{username}"
+
+    # Check cache first
+    cached_data = get_cached_data(cache_key)
+    if cached_data:
+        return jsonify(cached_data)
+
+    try:
+        # Get starred repositories
+        starred_response = requests.get(f'https://api.github.com/users/{username}/starred?per_page=20')
+        starred_response.raise_for_status()
+        starred_data = starred_response.json()
+
+        # Process starred repositories
+        starred_repos = []
+        for repo in starred_data[:10]:  # Limit to top 10 starred repos
+            repo_data = {
+                'name': repo.get('name', ''),
+                'description': repo.get('description', ''),
+                'html_url': repo.get('html_url', ''),
+                'language': repo.get('language', ''),
+                'stars': repo.get('stargazers_count', 0),
+                'forks': repo.get('forks_count', 0),
+                'owner': repo.get('owner', {}).get('login', ''),
+                'owner_avatar': repo.get('owner', {}).get('avatar_url', ''),
+                'topics': repo.get('topics', []),
+                'created_at': repo.get('created_at', ''),
+                'updated_at': repo.get('updated_at', '')
+            }
+            starred_repos.append(repo_data)
+
+        processed_data = {
+            'starred_repositories': starred_repos,
+            'total_starred': len(starred_data)
+        }
+
+        # Cache the result
+        set_cache_data(cache_key, processed_data)
+
+        return jsonify(processed_data)
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching GitHub starred data: {str(e)}")
+        return jsonify({
+            'error': str(e),
+            'starred_repositories': []
+        }), 200
+
+@portfolio_bp.route('/github/<username>/pinned', methods=['GET'])
+@cross_origin()
+def get_github_pinned(username):
+    """Get GitHub pinned repositories from user profile"""
+    cache_key = f"github_pinned_{username}"
+
+    # Check cache first
+    cached_data = get_cached_data(cache_key)
+    if cached_data:
+        return jsonify(cached_data)
+
+    try:
+        # GitHub doesn't have a direct API for pinned repos
+        # We'll fetch user's repos and return the top ones by stars
+
+        # Get all user repositories
+        repos_response = requests.get(f'https://api.github.com/users/{username}/repos?per_page=100&sort=updated')
+        repos_response.raise_for_status()
+        repos_data = repos_response.json()
+
+        # Filter out forked repos and sort by stars
+        user_repos = [repo for repo in repos_data if not repo.get('fork', False)]
+        user_repos.sort(key=lambda x: x.get('stargazers_count', 0), reverse=True)
+
+        # Process top 6 repositories (typical pinned repos count)
+        pinned_repos = []
+        for repo in user_repos[:6]:
+            repo_data = {
+                'name': repo.get('name', ''),
+                'description': repo.get('description', ''),
+                'html_url': repo.get('html_url', ''),
+                'language': repo.get('language', ''),
+                'stars': repo.get('stargazers_count', 0),
+                'forks': repo.get('forks_count', 0),
+                'owner': repo.get('owner', {}).get('login', ''),
+                'owner_avatar': repo.get('owner', {}).get('avatar_url', ''),
+                'topics': repo.get('topics', []),
+                'created_at': repo.get('created_at', ''),
+                'updated_at': repo.get('updated_at', '')
+            }
+            pinned_repos.append(repo_data)
+
+        processed_data = {
+            'pinned_repositories': pinned_repos,
+            'total_pinned': len(pinned_repos)
+        }
+
+        # Cache the result
+        set_cache_data(cache_key, processed_data)
+
+        return jsonify(processed_data)
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching GitHub pinned data: {str(e)}")
+        return jsonify({
+            'error': str(e),
+            'pinned_repositories': get_fallback_pinned_repos()
+        }), 200
+
+def get_fallback_pinned_repos():
+    """Fallback pinned repos data"""
+    return [
+        {
+            'name': 'pytorch_tutorials',
+            'description': 'Comprehensive PyTorch exercises from beginner to advanced level',
+            'html_url': 'https://github.com/omaratef3221/pytorch_tutorials',
+            'language': 'Python',
+            'stars': 73,
+            'forks': 30,
+            'owner': 'omaratef3221',
+            'topics': ['pytorch', 'machine-learning', 'deep-learning']
+        },
+        {
+            'name': 'SQL_Query_Generator_llm',
+            'description': 'SQL Query generator using Qwen2-1.5B instruct model',
+            'html_url': 'https://github.com/omaratef3221/SQL_Query_Generator_llm',
+            'language': 'Python',
+            'stars': 8,
+            'forks': 3,
+            'owner': 'omaratef3221',
+            'topics': ['llm', 'sql', 'nlp']
+        },
+        {
+            'name': 'podcast-summarizer-agent',
+            'description': 'LLMs, RAGs, MongoDB, Chatbot, Flutter Mobile app integration',
+            'html_url': 'https://github.com/omaratef3221/podcast-summarizer-agent',
+            'language': 'Python',
+            'stars': 6,
+            'forks': 0,
+            'owner': 'omaratef3221',
+            'topics': ['rag', 'llm', 'mongodb', 'flutter']
+        }
+    ]
 
 def get_fallback_github_data():
     """Fallback GitHub data for Omar when API is not available"""
@@ -427,10 +573,10 @@ def get_scholar_profile(author_id):
                 print(f"Error processing publication: {e}")
                 continue
         
-        # Sort by citations and get top 3
+        # Sort by citations and get top 4
         publications.sort(key=lambda x: x['citations'], reverse=True)
-        top_publications = publications[:3]
-        
+        top_publications = publications[:4]
+
         processed_data = {
             'profile': {
                 'name': author.get('name', ''),
@@ -440,7 +586,8 @@ def get_scholar_profile(author_id):
                 'citedby': author.get('citedby', 0),
                 'hindex': author.get('hindex', 0),
                 'i10index': author.get('i10index', 0),
-                'url_picture': author.get('url_picture', '')
+                'url_picture': author.get('url_picture', ''),
+                'scholar_url': f'https://scholar.google.com/citations?user={author_id}&hl=en'
             },
             'top_publications': top_publications,
             'total_publications': len(publications)
@@ -470,7 +617,8 @@ def get_fallback_scholar_data():
             'citedby': 350,
             'hindex': 3,
             'i10index': 2,
-            'url_picture': ''
+            'url_picture': '',
+            'scholar_url': 'https://scholar.google.com/citations?user=lw70gLkAAAAJ&hl=en'
         },
         'top_publications': [
             {
@@ -499,6 +647,15 @@ def get_fallback_scholar_data():
                 'citations': 12,
                 'url': 'https://doi.org/10.55432/978-1-6692-0007-9_4',
                 'abstract': 'This research presents a novel approach for heart failure prediction using machine learning combined with meta-heuristic feature selection.'
+            },
+            {
+                'title': 'Text Toxicity Level Detection using Deep Contextualized Embedding Models',
+                'authors': 'O. Elgendy, A. B. Nassif, B. Soudan',
+                'venue': 'The 2024 OkIP International Conference on Advances in Health Information Technology (AHIT)',
+                'year': '2024',
+                'citations': 8,
+                'url': 'https://doi.org/10.55432/978-1-6692-0007-9_3',
+                'abstract': 'This paper presents an approach for detecting toxicity levels in text using deep contextualized embedding models.'
             }
         ],
         'total_publications': 6
@@ -523,9 +680,60 @@ def cache_status():
             'age_seconds': time.time() - value['timestamp'],
             'valid': is_cache_valid(key)
         }
-    
+
     return jsonify({
         'cache_count': len(cache),
         'cache_info': cache_info
     })
+
+@portfolio_bp.route('/contact', methods=['POST'])
+@cross_origin()
+def send_contact_message():
+    """Handle contact form submissions"""
+    try:
+        data = request.get_json()
+
+        # Validate required fields
+        required_fields = ['name', 'email', 'subject', 'message']
+        for field in required_fields:
+            if field not in data or not data[field]:
+                return jsonify({
+                    'success': False,
+                    'error': f'Missing required field: {field}'
+                }), 400
+
+        # Extract form data
+        name = data.get('name')
+        email = data.get('email')
+        subject = data.get('subject')
+        message = data.get('message')
+
+        # For now, we'll just log the message and return success
+        # In production, you would send an email using SMTP or a service like SendGrid
+        print(f"""
+        New Contact Form Submission:
+        ============================
+        Name: {name}
+        Email: {email}
+        Subject: {subject}
+        Message: {message}
+        ============================
+        """)
+
+        # Here you can add email sending logic
+        # Example with SendGrid or SMTP:
+        # send_email(to='omaratef3221@gmail.com', from_email=email,
+        #            subject=subject, body=message, sender_name=name)
+
+        return jsonify({
+            'success': True,
+            'message': 'Your message has been sent successfully! I will get back to you soon.'
+        }), 200
+
+    except Exception as e:
+        print(f"Error processing contact form: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': 'An error occurred while sending your message. Please try again.'
+        }), 500
 

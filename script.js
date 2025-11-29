@@ -209,29 +209,64 @@ function initProjectFilter() {
 // Contact form functionality
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             // Get form data
             const formData = new FormData(this);
             const name = formData.get('name');
             const email = formData.get('email');
             const subject = formData.get('subject');
             const message = formData.get('message');
-            
-            // Create mailto link
-            const mailtoLink = `mailto:omaratef3221@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Show success message
-            showNotification('Thank you! Your email client should open now.', 'success');
-            
-            // Reset form
-            this.reset();
+
+            // Disable submit button
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                // Send to backend API
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        subject: subject,
+                        message: message
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    // Show success message
+                    showNotification(data.message || 'Message sent successfully!', 'success');
+
+                    // Reset form
+                    this.reset();
+                } else {
+                    // Show error message
+                    showNotification(data.error || 'Failed to send message. Please try again.', 'error');
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+
+                // Fallback to mailto if API fails
+                const mailtoLink = `mailto:omaratef3221@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                window.location.href = mailtoLink;
+
+                showNotification('Opening your email client as fallback...', 'info');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            }
         });
     }
 }

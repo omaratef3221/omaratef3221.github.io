@@ -214,7 +214,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
     position: relative;
@@ -227,6 +227,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 4rem;
     align-items: center;
     min-height: calc(100vh - 80px);
+    padding: 0 80px 0 20px;
 }
 
 .hero-title {
@@ -338,13 +339,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .social-links {
-    position: absolute;
-    left: 2rem;
+    position: fixed;
+    left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    z-index: 100;
 }
 
 .social-link {
@@ -1086,6 +1088,7 @@ section {
         text-align: center;
         gap: 2rem;
         min-height: auto;
+        padding: 0;
     }
 
     .hero-title {
@@ -1098,6 +1101,7 @@ section {
         justify-content: center;
         transform: none;
         margin-top: 2rem;
+        left: auto;
     }
 
     .about-content {
@@ -1325,5 +1329,58 @@ section:not(:last-child) {
 .contact-form .btn {
     align-self: flex-start;
     margin-top: 1rem;
+}
+
+/* Additional alignment fixes */
+.hero-content {
+    align-items: center;
+}
+
+.about-content {
+    align-items: center;
+}
+
+/* Ensure proper vertical alignment for experience items */
+.experience-item {
+    align-items: center;
+}
+
+/* Fix for project cards equal height */
+.project-card {
+    min-height: 400px;
+}
+
+/* Fix for stat cards alignment */
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fix publications card alignment */
+.publication-card {
+    align-items: center;
+}
+
+/* View More Publications button */
+.view-more-container {
+    text-align: center;
+    margin: 3rem 0;
+    padding: 2rem 0;
+}
+
+.view-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 14px 28px;
+    font-size: 1.05rem;
+    transition: var(--transition);
+}
+
+.view-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
 }
 

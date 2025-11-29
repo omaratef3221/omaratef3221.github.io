@@ -602,7 +602,17 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <!--
+                    For GitHub Pages deployment:
+                    1. Sign up at https://formspree.io (free)
+                    2. Create a new form and get your form ID
+                    3. Replace YOUR_FORMSPREE_ID below with your actual form ID
+                    4. Formspree will send form submissions to your email
+
+                    Alternatively, keep the current setup which uses JavaScript fetch to /api/contact
+                    (works with Flask backend during local development)
+                    -->
+                    <form id="contactForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="Your Name" required>
                         </div>
@@ -642,6 +652,9 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+    <script src="load-experience.js"></script>
+    <script src="scholar-integration.js"></script>
+    <script src="github-pinned.js"></script>
     <script src="api-integration.js"></script>
 </body>
 </html>
