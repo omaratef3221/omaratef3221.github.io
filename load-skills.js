@@ -27,18 +27,12 @@ async function loadSkillsData() {
             // Sort skills by level (highest first)
             skills.sort((a, b) => b.level - a.level);
 
-            // Build skills HTML
+            // Build skills HTML - compact pill style
             const skillsHTML = skills.map(skill => {
-                const percentage = (skill.level / 10) * 100;
                 return `
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">${skill.name}</span>
-                            <span class="skill-level">${skill.level}/10</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: ${percentage}%"></div>
-                        </div>
+                    <div class="skill-pill" data-level="${skill.level}">
+                        <span class="skill-name">${skill.name}</span>
+                        <span class="skill-level">${skill.level}</span>
                     </div>
                 `;
             }).join('');
