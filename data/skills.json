@@ -1,11 +1,6 @@
 {
   "skills": [
     {
-      "name": "Python",
-      "level": 10,
-      "category": "Programming Languages"
-    },
-    {
       "name": "Machine Learning",
       "level": 9,
       "category": "AI & ML"
@@ -30,18 +25,38 @@
       "level": 9,
       "category": "AI & ML"
     },
+        {
+      "name": "Agentic AI",
+      "level": 9,
+      "category": "AI & ML"
+    },
     {
       "name": "LLMs",
       "level": 9,
       "category": "AI & ML"
     },
+        {
+      "name": "RAGs",
+      "level": 9,
+      "category": "AI & ML"
+    },
     {
       "name": "AWS",
-      "level": 8,
+      "level": 9,
+      "category": "Cloud & DevOps"
+    },
+    {
+      "name": "GCP",
+      "level": 7,
       "category": "Cloud & DevOps"
     },
     {
       "name": "MLOps",
+      "level": 8,
+      "category": "Cloud & DevOps"
+    },
+    {
+      "name": "Airflow",
       "level": 8,
       "category": "Cloud & DevOps"
     },
@@ -71,14 +86,74 @@
       "category": "Frameworks"
     },
     {
+      "name": "LangChain",
+      "level": 8,
+      "category": "Frameworks"
+    },
+    {
+      "name": "Transformers",
+      "level": 8,
+      "category": "Frameworks"
+    },
+    {
+      "name": "LangGraph",
+      "level": 8,
+      "category": "Frameworks"
+    },
+    {
+      "name": "NumPy",
+      "level": 9,
+      "category": "Frameworks"
+    },
+    {
       "name": "Git",
       "level": 9,
       "category": "Tools"
     },
     {
-      "name": "JavaScript",
-      "level": 7,
-      "category": "Programming Languages"
+      "name": "Sagemaker",
+      "level": 9,
+      "category": "Tools"
+    },
+    {
+      "name": "Pandas",
+      "level": 9,
+      "category": "Data & Databases"
+    },
+    {
+      "name": "Grafana and Prometheus",
+      "level": 6,
+      "category": "Monitoring"
+    },
+    {
+      "name": "Grafana",
+      "level": 6,
+      "category": "Monitoring"
+    },
+    {
+      "name": "Power BI",
+      "level": 6,
+      "category": "Monitoring"
+    },
+    {
+      "name": "Linux",
+      "level": 8,
+      "category": "Misc"
+    },
+    {
+      "name": "Flask",
+      "level": 8,
+      "category": "Misc"
+    },
+    {
+      "name": "FastAPI",
+      "level": 6,
+      "category": "Misc"
+    },
+    {
+      "name": "GRCP",
+      "level": 6,
+      "category": "Misc"
     }
   ]
 }
